@@ -24,11 +24,16 @@ int main(){
         sum += input;
         counter++;
         }
+        if(counter == 0){
+            printf("No positiv number was entered.\n");
+        }
+        else{
         avrage = (float) sum/counter;
         printf("Min value: %d\n", min);
         printf("Max value: %d\n", max);
         printf("Sum: %d\n", sum);
         printf("Avrage: %f\n", avrage);
+        }
         char redo;
         printf("Do you want to enter a new sequence?\n");
         printf("1 = yes, 0 = no (default = no)");

@@ -4,16 +4,17 @@
 
 
 int squareRoot(float * number){
-    if(*number > 0){
-        *number = sqrt(*number);
-        return 1;
+    if(*number >= 0){
+        *number = sqrt(*number);//calculate squreroot
+        return 1;//true
     }
-    else return 0;
+    else return 0;//false
 }
 
 
 int main(){
     float input;
+    printf("Enter a number: ");
     scanf(" %f", &input);
     float* value = &input;
     int returnValue = squareRoot(value);

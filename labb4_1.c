@@ -22,17 +22,17 @@ void getRandomArray(int array[], int size);
 int main(){
     while(1){
         srandom(time(NULL)); //Used to get less predictable random. Using srandom instead of srand because i'm on linux. Seed is updated every second so runing the program multiple times in the same secon will have the exact same random values.
-        int size = getRandom(100);
-        int array[size];
-        getRandomArray(array, size);
+        int size = 10;//getRandom(100);//get random size array
+        int array[size];//^^
+        getRandomArray(array, size);//Fill array with random vlaues
         for(int i = 0; i < size; i++){
-            printf("Index: %d \t Value: %d\n", i, array[i]);
+            printf("Index: %d \t Value: %d\n", i, array[i]);//Print all values
         }
-        printf("\nArray size: %d\n", size);
+        printf("\nArray size: %d\n", size);//Print array size
         printf("Enter search number: ");
         int userInput;
-        scanf("%d", &userInput);
-        printf("The number %d appears %d time(s) in array\n", userInput, countElement(array, size, userInput));
+        scanf("%d", &userInput);//get search value from user
+        printf("The number %d appears %d time(s) in array\n", userInput, countElement(array, size, userInput));//Output to user
         char redo;
         printf("Do you want to run sequence again?\n");
         printf("1 = yes, 0 = no (default = no)");

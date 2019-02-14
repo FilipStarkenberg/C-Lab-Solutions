@@ -21,21 +21,21 @@ int main(){
     }
     int input;
     int counter = 0;
-    int amount = 0;
-    int number = 0;
-    int* p1 = &amount;
-    int* p2 = &number;
-
+    int amount;
+    int number;
     while(1){
-        counter++;
         scanf(" %d", &input);
         if(input > 1000 || input < 0 || counter > 100){
             break;
         }
         array[input]++;
+        counter++;
     }
-
-    getArrayData(p1, p2, array);
+    if(counter == 0){
+        printf("No number was enterd.\n");
+        return 0;
+    }
+    getArrayData(&amount, &number, array);
 
     printf("The number %d was the most frequent number in the list. It occured %d times\n", number, amount);
 

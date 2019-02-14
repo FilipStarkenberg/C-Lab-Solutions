@@ -4,7 +4,7 @@
 
 
 int getRandom(){
-    return rand() % 101;
+    return rand() % 101;//Return a random number from 0 to 100
 
 }
 
@@ -18,24 +18,24 @@ int main(){
         while(1){
             counter++;
             printf("Guess a number: ");
-            scanf("%d", &userInput);
-            if(randomNumber == userInput){
+            scanf("%d", &userInput);//get input from user
+            if(randomNumber == userInput){//Check if number is correct
                 printf("You guessed the correct number!\n");
                 printf("It took you %d attempts before guessing the correct number\n", counter);
                 break;
             }
-            else if(randomNumber >= userInput){
-                printf("The correct number is grater than %d\n", userInput);
+            else if(randomNumber >= userInput){//Check if number is greater than input
+                printf("The correct number is grater than %d\n", userInput);//Print to user
             }
-            else{
-                printf("The correct number is less than %d\n", userInput);
+            else{//Check if number is greater than input
+                printf("The correct number is less than %d\n", userInput);//print to user
             }
         }
         printf("Do you want to play again?\n");
         char redo;
-        printf("1 = yes, 0 = no (default = no)");
+        printf("y = yes, n = no (default = no)");
         scanf(" %c", &redo);
-        if(redo != '1'){ break; }
+        if(redo != 'y'){ break; }
     }
     return 0;
 }

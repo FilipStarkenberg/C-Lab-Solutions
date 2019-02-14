@@ -45,6 +45,7 @@ int main(){
         char inputString[STRING_MAX];
         printf("Enter string: ");
         scanf("\n%[^\n]%*c", inputString);
+        printf("\n");
 
         char* noSpaceString = removeSpecial(inputString);
         char* lowerString = stringToLower(noSpaceString);
@@ -56,7 +57,7 @@ int main(){
         }
 
         char redo;
-        printf("Do you want to play again?\n");
+        printf("\nDo you want to play again?\n");
         printf("1 = yes, 0 = no (default = no)");
         scanf(" %c", &redo);
         printf("\n");
@@ -66,6 +67,3 @@ int main(){
     }
     return 0;
 }
-
-
-
