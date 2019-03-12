@@ -4,6 +4,8 @@
 int getSpacesInString(char string[]){
     int stringLength = strlen(string);
     int counter = 0;
+
+    //For every space in string => counter + 1
     for(int i = 0; i < stringLength; i++){
         if(string[i] == ' '){
             counter++;
@@ -13,28 +15,24 @@ int getSpacesInString(char string[]){
 }
 
 char * get3rdString(char* string){
-    char* outputString = string;//Only used to make sense
+    char * address;
     int counter = 0;
-    int i,j;
-    for(i = 0, j = 0; i < strlen(string); i++,j++){
+    for(int i = 0; i < strlen(string); i++){
         if(counter > 1){//At the second word
-            outputString[j] = string[i];
-        }
-        else{
-            j--;
+            address = &string[i];
+            break;
         }
         if(string[i] == ' '){//Word +1
             counter++;
         }
     }
-    outputString[j] = 0;
-    return outputString;
+    return address;
 }
 
 
 int main(){
     char input[100];
-    scanf ("\n%[^\n]%*c", input);
+    scanf ("\n%[^\n]%*c", input);//Input untill \n
     printf("%d\n", getSpacesInString(input)+1);
     char* outString = get3rdString(input);
     printf("%s", outString);

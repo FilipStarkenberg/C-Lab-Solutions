@@ -22,8 +22,8 @@ void getRandomArray(int array[], int size);
 int main(){
     while(1){
         srandom(time(NULL)); //Used to get less predictable random. Using srandom instead of srand because i'm on linux. Seed is updated every second so runing the program multiple times in the same secon will have the exact same random values.
-        int size = 10;//getRandom(100);//get random size array
-        int array[size];//^^
+        //int size = 10;//getRandom(100);//get random size array
+        int array[10];//^^
         getRandomArray(array, size);//Fill array with random vlaues
         for(int i = 0; i < size; i++){
             printf("Index: %d \t Value: %d\n", i, array[i]);//Print all values

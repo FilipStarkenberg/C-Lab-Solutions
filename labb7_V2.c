@@ -3,7 +3,6 @@
 #include <ctype.h>
 #include <stdlib.h>
 
-#define ARRAY_SIZE 5
 #define INPUT_MAX 100
 
 typedef struct Products {
@@ -14,28 +13,47 @@ typedef struct Products {
 
 
 typedef struct shopping_lists{
-    Product list[ARRAY_SIZE];
-    int length;
+    Product *list;
+    size_t used;
+    size_t size;
 }shoppingList;
 
+void initializeArray(shoppingList *list, size_t initialSize){
+    list->list = (Product *)malloc(initialSize * sizeof(Product));
+    list->used = 0;
+    list->size = initialSize;
+}
 
 
-void addProductToList(Product* list, int* size){
+void insertList(shoppingList *list, Product product){
+    if(list->used == list ->size){
+        list->size++;
+        list->list = (Product *)realloc(list->list, list->size * sizeof(Product));
+    }
+    list->list[list->used++] = product;
+}
+
+void freeList(shoppingList *list){
+    free(list->list);
+    list->list = NULL;
+    list->used = list->size = 0;
+}
+
+
+
+void addProductToList(shoppingList *list){
+    Product tempProduct;
     char userInput[INPUT_MAX];
     float temp;
     char str[INPUT_MAX];
-    if(*size > ARRAY_SIZE -1){
-        printf("List s full!\n");
-        return;
-    }
     while(1){
-    printf("Enter product name: ");
+        printf("Enter product name: ");
         fgets(userInput, INPUT_MAX, stdin);
         if(sscanf(userInput, "%f", &temp) == 1){
             printf("Input error.\n");
         }
         else if(sscanf(userInput, "\n%[^\n]%*c", str) == 1){
-            strcpy(list[*size].name, str);
+            strcpy(tempProduct.name, str);
             break;
         }
         else{
@@ -47,8 +65,8 @@ void addProductToList(Product* list, int* size){
         fgets(userInput, INPUT_MAX, stdin);
         if(sscanf(userInput, "%f", &temp) == 1){
             if(temp > 0){
-            list[*size].amount = temp;
-            break;
+                tempProduct.amount = temp;
+                break;
             }
             else{
                 printf("Input error.\n");
@@ -65,21 +83,21 @@ void addProductToList(Product* list, int* size){
             printf("Input error.\n");
         }
         else if(sscanf(userInput, "\n%[^\n]%*c", str) == 1){
-            strcpy(list[*size].unit, str);
+            strcpy(tempProduct.unit, str);
             break;
         }
         else{
             printf("Input error.\n");
         }
     }
-    *size = *size + 1;
+    insertList(list, tempProduct);
 }
 
 void printList(Product* list, int size){
     int strMax = 0;
     for(int i = 0; i < size; i++){
         if(strlen(list[i].name) > strMax){
-            strMax = strlen(list[i].name);
+            strMax =(int) strlen(list[i].name);
         }
     }
     if(size > 0){
@@ -97,7 +115,8 @@ void printList(Product* list, int size){
 
 int main(){
     shoppingList list;
-    list.length = 0;
+    initializeArray(&list, 1);
+
     int quit = 0;
     while(1){
         int command;
@@ -107,10 +126,10 @@ int main(){
         if(sscanf (userInput, "%d", &command)){
             switch(command){
                 case 1:
-                    addProductToList(list.list, &list.length);
+                    addProductToList(&list);
                     break;
                 case 2:
-                    printList(list.list, list.length);
+                    printList(list.list, (int)list.used);
                     break;
                 case 3:
                     quit = 1;
@@ -124,6 +143,7 @@ int main(){
             printf("Input error. \n");
         }
         if(quit){
+            freeList(&list);
             break;
         }
     }

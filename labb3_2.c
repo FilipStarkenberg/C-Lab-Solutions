@@ -4,7 +4,7 @@
 
 
 int getRandom(){
-    return rand() % 101;//Return a random number from 0 to 100
+    return rand() % 100;//Return a random number from 0 to 99
 
 }
 
@@ -13,7 +13,7 @@ int main(){
     while(1){
         srandom(time(NULL)); //Used to get less predictable random. Using srandom instead of srand because i'm on linux.
         int userInput;
-        int randomNumber = getRandom();
+        int randomNumber = getRandom()+1;
         int counter = 0;
         while(1){
             counter++;
